@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="static/preview.svg" alt="Craftdesk 方野 workbench" width="920"/>
+  <img src="static/preview.png" alt="Craftdesk 方野 workbench" width="920"/>
 </p>
 
 <h1 align="center">Craftdesk 方野</h1>
@@ -21,7 +21,7 @@
 ## Preview
 
 <p align="center">
-  <img src="static/settings.svg" alt="Settings → Theme → Craftdesk 方野" width="920"/>
+  <img src="static/settings.png" alt="Settings → Theme → Craftdesk 方野" width="920"/>
 </p>
 
 | Surface | Token | Hex |
@@ -54,7 +54,7 @@ plugin:io.github.jeasonloop.theme-craftdesk:craftdesk
 
 官方插件中心是 [plugins.aiuo.net](https://plugins.aiuo.net)。本仓库是可复现的源；上架步骤：
 
-1. 打 `v1.4.6` tag（本仓库已按该版本发布）
+1. 打 `v1.4.7` tag（本仓库已按该版本发布）
 2. 在插件中心提交本 GitHub 仓库，`sourceRef` 指向该 tag
 3. 审核通过后会出现在 PI-Desktop **插件 → 市场** 使用的 `catalog.json`
 
@@ -101,7 +101,7 @@ PI-Desktop **0.15.6** 的 host-core 在 `installFromPath` 时要求 theme assets
 ```bash
 pnpm pi-plugin check .
 pnpm pi-plugin pack .
-# dist/io.github.jeasonloop.theme-craftdesk-1.4.6.piplug
+# dist/io.github.jeasonloop.theme-craftdesk-1.4.7.piplug
 ```
 
 `.piplug` 必须是 store-only ZIP；普通压缩 zip 会被安装器拒绝。
@@ -109,7 +109,7 @@ pnpm pi-plugin pack .
 提交插件中心前：
 
 ```bash
-pnpm pi-plugin publish . --ref v1.4.6 --channel stable
+pnpm pi-plugin publish . --ref v1.4.7 --channel stable
 ```
 
 会生成 `dist/<id>-<version>.submission.json`，把 `.piplug` 挂到同一 commit 的 GitHub Release，再把 payload 交到插件中心。中心会从 forge 重新解析源，不信任本地记录。

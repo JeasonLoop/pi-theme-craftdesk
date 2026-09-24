@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.jeasonloop.theme-craftdesk",
   "name": "Craftdesk Theme",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "A refined pixel-workbench theme for PI-Desktop: BoutiqueBitmap 9x9 UI type, JetBrains Mono for code, a quiet drafting grid, charcoal navigation, and restrained grass-green state color.",
   "i18n": {
     "en": {
@@ -48,7 +48,7 @@
     "community"
   ],
   "safetyNotes": "Pure styling. No network, file, clipboard, or agent access.",
-  "changelog": "1.4.6: Recenter settings buttons and nav: drop the SVG lift, give labels a real 1px optical offset, and keep icons on the flex centerline.",
+  "changelog": "1.4.7: Replace README previews with real workbench and Settings screenshots.",
   "permissions": [
     "ui.panel",
     "ui.theme"

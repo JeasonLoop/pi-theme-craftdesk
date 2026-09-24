@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.7
+
+- Replace README previews with real workbench and Settings screenshots.
+
 ## 1.4.6
 
 - Recenter settings buttons and nav: drop the SVG lift, give labels a real 1px optical offset, and keep icons on the flex centerline.
