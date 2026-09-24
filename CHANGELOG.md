@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.9
+
+- Embed a BoutiqueBitmap UI CJK subset so Settings navigation matches the local theme.
+
 ## 1.4.8
 
 - Embed fonts as CSS `data:` URLs so marketplace install works on PI-Desktop 0.15.6 (relative `assets` are rejected).

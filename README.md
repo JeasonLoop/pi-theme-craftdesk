@@ -54,7 +54,7 @@ plugin:io.github.jeasonloop.theme-craftdesk:craftdesk
 
 官方插件中心是 [plugins.aiuo.net](https://plugins.aiuo.net)。本仓库是可复现的源；上架步骤：
 
-1. 打 `v1.4.8` tag（本仓库已按该版本发布）
+1. 打 `v1.4.9` tag（本仓库已按该版本发布）
 2. 在插件中心提交本 GitHub 仓库，`sourceRef` 指向该 tag
 3. 审核通过后会出现在 PI-Desktop **插件 → 市场** 使用的 `catalog.json`
 
@@ -83,7 +83,7 @@ pi-theme-craftdesk/
 
 无 `net.fetch` / `fs.*` / `clipboard.*` / `agent.*`。宿主会净化 CSS：禁止 `@import`，`url()` 只能是 `data:` 或声明在 `contributes.themes[].assets` 里的**绝对**路径。
 
-PI-Desktop **0.15.6** 的 host-core 在市场安装时拒绝相对 theme assets（`fonts/*.woff2` → `PLUGIN_INVALID`）。本主题把字体嵌进 CSS 的 `data:font/woff2;base64,...`，**不再声明 `assets`**。BoutiqueBitmap 受 256 KiB CSS 上限限制，主题内嵌的是 Latin / 标点子集，中文回退到系统黑体（`Noto Sans SC` / `Microsoft YaHei UI`）；完整 OFL 字文件仍放在 `fonts/` 供面板和本地开发使用。若 Settings 列表没有「Craftdesk 方野」，检查 `~/.pi-desktop/logs/app/plugin.log` 是否出现 `plugin.themes.skipped` / `INVALID_CSS`。
+PI-Desktop **0.15.6** 的 host-core 在市场安装时拒绝相对 theme assets（`fonts/*.woff2` → `PLUGIN_INVALID`）。本主题把字体嵌进 CSS 的 `data:font/woff2;base64,...`，**不再声明 `assets`**。BoutiqueBitmap 受 256 KiB CSS 上限限制，内嵌的是 Latin + 设置/侧栏常用汉字子集（覆盖「常规 / 偏好 / 智能体 / 工作区」等宿主文案），长文中文仍回退系统黑体。完整 OFL 字文件仍在 `fonts/`。若 Settings 列表没有「Craftdesk 方野」，检查 `~/.pi-desktop/logs/app/plugin.log` 是否出现 `plugin.themes.skipped` / `INVALID_CSS`。
 
 ## Fonts
 
@@ -101,7 +101,7 @@ PI-Desktop **0.15.6** 的 host-core 在市场安装时拒绝相对 theme assets�
 ```bash
 pnpm pi-plugin check .
 pnpm pi-plugin pack .
-# dist/io.github.jeasonloop.theme-craftdesk-1.4.8.piplug
+# dist/io.github.jeasonloop.theme-craftdesk-1.4.9.piplug
 ```
 
 `.piplug` 必须是 store-only ZIP；普通压缩 zip 会被安装器拒绝。
@@ -109,7 +109,7 @@ pnpm pi-plugin pack .
 提交插件中心前：
 
 ```bash
-pnpm pi-plugin publish . --ref v1.4.8 --channel stable
+pnpm pi-plugin publish . --ref v1.4.9 --channel stable
 ```
 
 会生成 `dist/<id>-<version>.submission.json`，把 `.piplug` 挂到同一 commit 的 GitHub Release，再把 payload 交到插件中心。中心会从 forge 重新解析源，不信任本地记录。
