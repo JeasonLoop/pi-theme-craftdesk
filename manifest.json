@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.jeasonloop.theme-craftdesk",
   "name": "Craftdesk Theme",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "A refined pixel-workbench theme for PI-Desktop: BoutiqueBitmap 9x9 UI type, JetBrains Mono for code, a quiet drafting grid, charcoal navigation, and restrained grass-green state color.",
   "i18n": {
     "en": {
@@ -35,11 +35,7 @@
         "id": "craftdesk",
         "label": "Craftdesk 方野",
         "base": "light",
-        "path": "themes/craftdesk.css",
-        "assets": [
-          "fonts/BoutiqueBitmap9x9.woff2",
-          "fonts/JetBrainsMono-Regular.woff2"
-        ]
+        "path": "themes/craftdesk.css"
       }
     ]
   },
@@ -48,7 +44,7 @@
     "community"
   ],
   "safetyNotes": "Pure styling. No network, file, clipboard, or agent access.",
-  "changelog": "1.4.7: Replace README previews with real workbench and Settings screenshots.",
+  "changelog": "1.4.8: Embed fonts as data: URLs so marketplace install works on PI-Desktop 0.15.6.",
   "permissions": [
     "ui.panel",
     "ui.theme"

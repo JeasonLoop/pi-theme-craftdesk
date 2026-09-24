@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.8
+
+- Embed fonts as CSS `data:` URLs so marketplace install works on PI-Desktop 0.15.6 (relative `assets` are rejected).
+
 ## 1.4.7
 
 - Replace README previews with real workbench and Settings screenshots.
