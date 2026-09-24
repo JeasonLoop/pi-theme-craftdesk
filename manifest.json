@@ -44,7 +44,7 @@
     "community"
   ],
   "safetyNotes": "Pure styling. No network, file, clipboard, or agent access.",
-  "changelog": "1.4.9: Embed a BoutiqueBitmap UI CJK subset so Settings nav matches the local theme.",
+  "changelog": "1.4.9: Embed GB2312 level-1 + Settings CJK so chat and Settings nav share the pixel face.",
   "permissions": [
     "ui.panel",
     "ui.theme"

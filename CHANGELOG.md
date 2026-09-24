@@ -2,7 +2,7 @@
 
 ## 1.4.9
 
-- Embed a BoutiqueBitmap UI CJK subset so Settings navigation matches the local theme.
+- Embed GB2312 level-1 + Settings CJK in BoutiqueBitmap so chat and Settings nav share the pixel face.
 
 ## 1.4.8
 

@@ -83,7 +83,7 @@ pi-theme-craftdesk/
 
 无 `net.fetch` / `fs.*` / `clipboard.*` / `agent.*`。宿主会净化 CSS：禁止 `@import`，`url()` 只能是 `data:` 或声明在 `contributes.themes[].assets` 里的**绝对**路径。
 
-PI-Desktop **0.15.6** 的 host-core 在市场安装时拒绝相对 theme assets（`fonts/*.woff2` → `PLUGIN_INVALID`）。本主题把字体嵌进 CSS 的 `data:font/woff2;base64,...`，**不再声明 `assets`**。BoutiqueBitmap 受 256 KiB CSS 上限限制，内嵌的是 Latin + 设置/侧栏常用汉字子集（覆盖「常规 / 偏好 / 智能体 / 工作区」等宿主文案），长文中文仍回退系统黑体。完整 OFL 字文件仍在 `fonts/`。若 Settings 列表没有「Craftdesk 方野」，检查 `~/.pi-desktop/logs/app/plugin.log` 是否出现 `plugin.themes.skipped` / `INVALID_CSS`。
+PI-Desktop **0.15.6** 的 host-core 在市场安装时拒绝相对 theme assets（`fonts/*.woff2` → `PLUGIN_INVALID`）。本主题把字体嵌进 CSS 的 `data:font/woff2;base64,...`，**不再声明 `assets`**。BoutiqueBitmap 受 256 KiB CSS 上限限制，内嵌 GB2312 一级 + 设置页汉字（约 3700 字），设置侧栏和对话正文共用 `--font-sans`；生僻字仍回退系统黑体。JetBrains Mono 内嵌 Latin 子集。完整 OFL 字文件仍在 `fonts/`。若 Settings 列表没有「Craftdesk 方野」，检查 `~/.pi-desktop/logs/app/plugin.log` 是否出现 `plugin.themes.skipped` / `INVALID_CSS`。
 
 ## Fonts
 
