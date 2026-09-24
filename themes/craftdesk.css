@@ -1,0 +1,808 @@
+@font-face {
+  font-family: "Craftdesk Boutique";
+  src: url("fonts/BoutiqueBitmap9x9.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Craftdesk JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Craftdesk for PI-Desktop. Refined pixel-workbench, base: light. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --font-sans: "Craftdesk Boutique", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;
+  --font-mono: "Craftdesk JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  /* The pixel font ships a single weight; faux-bold smears glyphs and makes
+     labels look misaligned next to icons. */
+  font-synthesis: none;
+
+  /* Quiet warm-cool neutrals. Green is reserved for state and focus. */
+  --ds-bg-primary: #f6f4ef;
+  --ds-bg-sidebar: #292b29;
+  --ds-bg-secondary: #eeece6;
+  --ds-bg-tertiary: #e5e2da;
+  --ds-bg-inset: #dfdcd3;
+  --ds-bg-under: #ebe8e1;
+  --ds-bg-elevated: rgba(252, 250, 245, .97);
+  --ds-bg-elevated-opaque: #fcfaf5;
+  --ds-bg-elevated-primary: rgba(252, 250, 245, .97);
+  --ds-bg-hover: rgba(43, 47, 42, .055);
+  --ds-bg-active: rgba(79, 114, 52, .13);
+  --ds-bg-composer: #fcfaf5;
+  --ds-bg-chip: rgba(43, 47, 42, .055);
+
+  --ds-text-primary: #292b29;
+  --ds-text-secondary: #5e625c;
+  --ds-text-muted: #676c65;
+  --ds-text-faint: #686e65;
+  --ds-placeholder-ink: #686d66;
+
+  --ds-border-default: rgba(50, 54, 49, .19);
+  --ds-border-subtle: rgba(50, 54, 49, .1);
+  --ds-border-strong: rgba(50, 54, 49, .32);
+
+  --ds-tile: rgba(252, 250, 245, .64);
+  --ds-tile-hover: rgba(43, 47, 42, .06);
+  --ds-tile-deep: rgba(43, 47, 42, .09);
+  --ds-raised: #fcfaf5;
+  --ds-raised-shadow: inset 1px 1px 0 rgba(255, 255, 255, .7), inset -1px -1px 0 rgba(42, 32, 20, .18), 2px 2px 0 rgba(42, 32, 20, .18);
+  --ds-bevel-light: #f4efe6;
+  --ds-bevel-dark: #6f6458;
+  --ds-accent: #4f7434;
+  --ds-accent-hover: #3f6028;
+  --ds-accent-soft: #78945f;
+  --ds-success: #4f7434;
+  --ds-warning: #aa742d;
+  --ds-error: #b84c42;
+  --ds-info: #547986;
+  --ds-purple: #765f83;
+
+  --ds-switch-track-off: #b9ac9c;
+  --ds-switch-track-off-hover: #a99a88;
+  --ds-switch-ring-off: rgba(41, 43, 41, .25);
+  --ds-switch-knob-off: #fcfaf5;
+  --ds-switch-knob-on: #fcfaf5;
+
+  --ds-shadow-dialog: inset 1px 1px 0 rgba(255, 255, 255, .55), inset -1px -1px 0 rgba(42, 32, 20, .16), 2px 2px 0 rgba(42, 32, 20, .12), 0 16px 36px rgba(42, 38, 32, .1);
+  --ds-shadow-composer: inset 1px 1px 0 rgba(255, 255, 255, .72), inset -1px -1px 0 rgba(42, 32, 20, .16), 3px 3px 0 rgba(42, 32, 20, .16);
+  --ds-elevation-stroke: 0 0 0 1px rgba(50, 54, 49, .16);
+  --ds-sidebar-glass-tint: rgba(41, 43, 41, .98);
+  --ds-sidebar-glass-sheen-top: rgba(255, 255, 255, .045);
+  --ds-sidebar-glass-sheen-bottom: rgba(255, 255, 255, .01);
+}
+
+/* The 24px drafting grid carries the reference without turning the app into a game skin. */
+html,
+body,
+#root {
+  background-color: var(--ds-bg-primary);
+  background-image:
+    linear-gradient(rgba(67, 70, 65, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(67, 70, 65, .045) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+
+/* Charcoal navigation is the visual anchor. Scope tokens to verified host surfaces. */
+.sidebar,
+.sidebar-surface,
+.sidebar-rail {
+  --ds-text-primary: #f4f2ec;
+  --ds-text-secondary: #c9ccc5;
+  --ds-text-muted: #aeb3aa;
+  --ds-text-faint: #9da39a;
+  --ds-border-default: rgba(255, 255, 255, .14);
+  --ds-border-subtle: rgba(255, 255, 255, .075);
+  --ds-bg-hover: rgba(255, 255, 255, .075);
+  --ds-bg-active: rgba(111, 145, 82, .2);
+  --ds-settings-nav-active: rgba(111, 145, 82, .2);
+}
+
+.sidebar-surface,
+.sidebar-rail {
+  border-right-color: rgba(255, 255, 255, .08);
+}
+
+/* Settings navigation stays dark in every state. Selection is a quiet inset marker,
+   not a light pill that destroys text contrast. */
+.settings-nav.sidebar-surface,
+.settings-nav.sidebar-surface .settings-nav-item,
+.settings-nav.sidebar-surface .settings-nav-label,
+.settings-nav.sidebar-surface .settings-nav-group-label,
+.settings-nav.sidebar-surface .settings-search,
+.settings-nav.sidebar-surface .settings-nav-experimental {
+  font-family: "Craftdesk Boutique", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;
+  font-synthesis: none;
+  letter-spacing: 0;
+}
+
+.settings-nav.sidebar-surface .settings-nav-item {
+  position: relative;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #c9ccc5;
+  line-height: 1;
+}
+
+.settings-nav.sidebar-surface .settings-nav-item:hover {
+  color: #f4f2ec;
+  background: rgba(255, 255, 255, .075);
+}
+
+.settings-nav.sidebar-surface .settings-nav-item.active,
+.settings-nav.sidebar-surface .settings-nav-item.active:hover {
+  color: #f4f2ec;
+  background: rgba(111, 145, 82, .2);
+  border-color: rgba(137, 174, 104, .14);
+  box-shadow: inset 3px 0 0 #789a59;
+}
+
+.settings-nav.sidebar-surface .settings-nav-item.active .settings-nav-icon {
+  color: #a7c58d;
+  opacity: 1;
+}
+
+.settings-nav.sidebar-surface .settings-nav-group-label {
+  color: #aeb3aa;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.settings-nav.sidebar-surface .settings-search {
+  height: 32px;
+  line-height: 1;
+}
+
+/* Composer: one material, one focus state. No nested green rectangle. */
+:root[data-theme="light"] .composer-shell {
+  border: 2px solid !important;
+  border-color: var(--ds-bevel-light) var(--ds-bevel-dark) var(--ds-bevel-dark) var(--ds-bevel-light) !important;
+  outline: none !important;
+  border-radius: 6px;
+  background: #fcfaf5;
+  box-shadow: var(--ds-shadow-composer);
+  overflow: hidden;
+  transition: border-color .16s ease, box-shadow .16s ease, transform .12s ease;
+}
+
+:root[data-theme="light"] .composer-shell:focus-within {
+  border-color: #8db36a #3f6028 #3f6028 #8db36a !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, .72),
+    inset -1px -1px 0 rgba(42, 32, 20, .16),
+    3px 3px 0 rgba(42, 32, 20, .16),
+    0 0 0 3px rgba(79, 116, 52, .1) !important;
+}
+
+.composer-input,
+.composer-input:focus,
+.composer-input:focus-visible,
+.composer-input-stage:focus-within {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.composer-input-wrap {
+  padding: 13px 14px 2px;
+}
+
+.composer-toolbar {
+  padding: 5px 9px 9px;
+  border-top: 1px solid rgba(50, 54, 49, .07);
+}
+
+.composer-toolbar .icon-btn,
+.mode-chip {
+  border-radius: 5px !important;
+}
+
+.composer-toolbar .icon-btn:hover,
+.mode-chip:hover {
+  background: rgba(43, 47, 42, .065);
+}
+
+/* Message hierarchy: assistant content breathes; only the user's message is a contained object. */
+.message-row.assistant .message-bubble,
+.message-row.system .message-bubble,
+.message-row.tool .message-bubble {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.message-row.user .message-bubble {
+  color: #f5f3ed;
+  background: #30332f;
+  border: 2px solid;
+  border-color: #4a4e49 #1b1d1b #1b1d1b #4a4e49;
+  border-left-color: #6f9252;
+  border-radius: 4px;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .08), inset -1px -1px 0 rgba(0, 0, 0, .22), 1px 1px 0 rgba(27, 29, 27, .16);
+}
+
+.message-row.user .message-user-text {
+  color: inherit;
+}
+
+.message-row.user .message-bubble a,
+.message-row.user .message-bubble .chat-text-link,
+.message-row.user .message-bubble .chat-code-link,
+.message-row.user .message-bubble .message-attachment,
+.message-row.user .message-bubble .chat-file-chip,
+.message-row.user .message-bubble .chat-image-chip,
+.message-row.user .message-bubble .chat-command-chip {
+  color: #dcebd0;
+}
+
+.message-row.user .message-bubble code {
+  color: #edf5e7 !important;
+  background: rgba(126, 161, 95, .18) !important;
+}
+
+/* Focus ownership follows the host structure: controls focus themselves,
+   compound search fields focus their rounded container. */
+button,
+[role="button"] {
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(79, 116, 52, .72);
+  outline-offset: 2px;
+}
+
+.settings-search-wrap,
+.settings-language-search,
+.settings-theme-search,
+.settings-font-search,
+.home-project-switcher-search,
+.composer-model-search,
+.search-input-row,
+.agent-capability-search-wrap,
+.projects-search-wrap,
+.provider-model-search-wrap,
+.provider-models-search-wrap,
+.provider-chosen-search-wrap,
+.provider-service-search,
+.model-default-search,
+.plugins-search-wrap,
+.scope-popover-search,
+.plugin-launcher-search-row {
+  border: 1px solid transparent;
+  transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+.settings-search-wrap:focus-within,
+.settings-language-search:focus-within,
+.settings-theme-search:focus-within,
+.settings-font-search:focus-within,
+.home-project-switcher-search:focus-within,
+.composer-model-search:focus-within,
+.search-input-row:focus-within,
+.agent-capability-search-wrap:focus-within,
+.projects-search-wrap:focus-within,
+.provider-model-search-wrap:focus-within,
+.provider-models-search-wrap:focus-within,
+.provider-chosen-search-wrap:focus-within,
+.provider-service-search:focus-within,
+.model-default-search:focus-within,
+.plugins-search-wrap:focus-within,
+.scope-popover-search:focus-within,
+.plugin-launcher-search-row:focus-within {
+  border-color: rgba(79, 116, 52, .5);
+  box-shadow: 0 0 0 3px rgba(79, 116, 52, .09);
+}
+
+.settings-search-wrap input,
+.settings-language-search input,
+.settings-theme-search input,
+.settings-font-search input,
+.home-project-switcher-search input,
+.composer-model-search input,
+.search-input-row input,
+.agent-capability-search-wrap input,
+.projects-search-wrap input,
+.provider-model-search-wrap input,
+.provider-models-search-wrap input,
+.provider-chosen-search-wrap input,
+.provider-service-search input,
+.model-default-search input,
+.plugins-search-wrap input,
+.scope-popover-search input,
+.plugin-launcher-search-row input,
+.settings-search,
+.settings-font-search,
+.plugins-search,
+.plugin-launcher-input {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="light"] .settings-language-search,
+:root[data-theme="light"] .settings-theme-search,
+:root[data-theme="light"] .settings-font-search,
+:root[data-theme="light"] .home-project-switcher-search,
+:root[data-theme="light"] .composer-model-search,
+:root[data-theme="light"] .settings-search-wrap,
+:root[data-theme="light"] .plugins-search-wrap,
+:root[data-theme="light"] .agent-capability-search-wrap,
+:root[data-theme="light"] .projects-search-wrap {
+  align-items: center;
+}
+
+:root[data-theme="light"] .settings-language-search input,
+:root[data-theme="light"] .settings-theme-search input,
+:root[data-theme="light"] .settings-font-search input,
+:root[data-theme="light"] .home-project-switcher-search input,
+:root[data-theme="light"] .composer-model-search input,
+:root[data-theme="light"] .settings-search,
+:root[data-theme="light"] .plugins-search,
+:root[data-theme="light"] .agent-capability-search,
+:root[data-theme="light"] .projects-search {
+  display: block;
+  height: 100%;
+  padding-top: 2px;
+  padding-bottom: 0;
+  line-height: 1.15;
+  font-family: "Craftdesk Boutique", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;
+  font-synthesis: none;
+}
+
+::selection {
+  color: #f8f7f2;
+  background: #4f7434;
+}
+
+/* A warm light code surface keeps the host's light-theme syntax token colors legible. */
+:root[data-theme="light"] .code-block,
+:root[data-theme="light"] .prose-chat pre:not(.mermaid-source) {
+  --code-block-bg: #eeece6;
+  color: #292b29 !important;
+  background: #eeece6 !important;
+  border: 1px solid #c9c9c1 !important;
+  border-radius: 7px !important;
+  box-shadow: 0 3px 10px rgba(38, 40, 37, .07);
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+}
+
+/* The fenced block owns the surface; its pre is only the scrolling text area. */
+:root[data-theme="light"] .prose-chat .code-block pre {
+  color: #292b29 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="light"] .code-block-head {
+  background: #e5e2da;
+  border-bottom: 1px solid #c9c9c1;
+}
+
+:root[data-theme="light"] .code-block-lang,
+:root[data-theme="light"] .code-block .code-copy-btn {
+  color: #50574c;
+  opacity: 1;
+}
+
+:root[data-theme="light"] .code-block .code-copy-btn:hover {
+  color: #292b29;
+  background: rgba(43, 47, 42, .09);
+}
+
+:root[data-theme="light"] .prose-chat :not(pre) > code {
+  color: #3d5f2a !important;
+  background: rgba(79, 116, 52, .1) !important;
+}
+
+.message-meta,
+.message-meta-chip {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .015em;
+  color: var(--ds-text-muted);
+}
+dialog,
+[role="dialog"],
+.sidebar-popover,
+.sidebar-floating-menu,
+.settings-language-menu,
+.settings-theme-menu,
+.settings-menu-select-menu {
+  border: 2px solid;
+  border-color: var(--ds-bevel-light) var(--ds-bevel-dark) var(--ds-bevel-dark) var(--ds-bevel-light);
+  border-radius: 6px;
+  box-shadow: var(--ds-shadow-dialog);
+  background: #fcfaf5;
+}
+
+.thread-content {
+  width: min(100%, var(--chat-composer-max-width, 768px));
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.message-row.assistant .message-col,
+.message-row.system .message-col,
+.message-row.tool .message-col {
+  width: min(100%, var(--chat-composer-max-width, 768px));
+}
+
+.file-viewer-body .file-viewer-markdown {
+  padding: 20px 24px 30px;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root[data-theme="light"] .composer-shell,
+  dialog,
+  [role="dialog"] {
+    background: #fcfaf5;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+/* MC bevel: light northwest, dark southeast, pressed on active. */
+.settings-language-trigger,
+.settings-theme-trigger,
+.settings-menu-select-trigger,
+.settings-font-trigger {
+  border: 2px solid !important;
+  border-color: var(--ds-bevel-light) var(--ds-bevel-dark) var(--ds-bevel-dark) var(--ds-bevel-light) !important;
+  border-radius: 4px !important;
+  background: #fcfaf5 !important;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .7), inset -1px -1px 0 rgba(42, 32, 20, .16), 2px 2px 0 rgba(42, 32, 20, .18) !important;
+  height: 32px;
+}
+
+.settings-language-trigger:hover,
+.settings-theme-trigger:hover,
+.settings-menu-select-trigger:hover,
+.settings-font-trigger:hover {
+  background: #f3eee4 !important;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .78), inset -1px -1px 0 rgba(42, 32, 20, .16), 3px 3px 0 rgba(42, 32, 20, .18) !important;
+  transform: translateY(-1px);
+}
+
+.settings-language-trigger:active,
+.settings-theme-trigger:active,
+.settings-menu-select-trigger:active,
+.settings-font-trigger:active,
+.settings-language-anchor:has(.settings-language-menu.is-open) .settings-language-trigger,
+.settings-theme-anchor:has(.settings-theme-menu.is-open) .settings-theme-trigger,
+.settings-menu-select-anchor:has(.settings-menu-select-menu.is-open) .settings-menu-select-trigger,
+.settings-font:has(.settings-menu-select-menu.is-open) .settings-font-trigger {
+  border-color: var(--ds-bevel-dark) var(--ds-bevel-light) var(--ds-bevel-light) var(--ds-bevel-dark) !important;
+  background: #efe8dc !important;
+  box-shadow: inset 2px 2px 0 rgba(42, 32, 20, .16) !important;
+  transform: translateY(1px);
+}
+
+.settings-language-option,
+.settings-theme-option,
+.settings-menu-select-option,
+.settings-font-item {
+  border-radius: 3px;
+}
+
+.settings-row {
+  border: 1px solid rgba(50, 54, 49, .1);
+  border-radius: 8px;
+  background: #fcfaf5;
+  box-shadow: none;
+}
+
+:root[data-theme="light"] .settings-segment {
+  border-radius: 5px !important;
+  align-items: center;
+  padding: 3px;
+}
+
+
+:root[data-theme="light"] .settings-row-control .btn,
+:root[data-theme="light"] .settings-row-control > button:not(.settings-toggle):not([role="switch"]) {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 30px;
+  min-height: 30px;
+  padding: 0 12px !important;
+  line-height: 1 !important;
+  border-radius: 4px !important;
+}
+
+/* Checkboxes keep the host's round geometry; the toggle owns its own size. */
+:root[data-theme="light"] .settings-row-control input[type="checkbox"] {
+  border-radius: var(--radius-full) !important;
+}
+
+/* Sidebar identity remains part of the theme even when the user selects a
+   different global reading font in Settings. */
+.sidebar .thread-item-title,
+.sidebar .sidebar-session-group-title,
+.sidebar .sidebar-time-group-header,
+.sidebar .sidebar-list-label {
+  font-family: "Craftdesk Boutique", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;
+  font-synthesis: none;
+  letter-spacing: 0;
+}
+
+.sidebar .thread-item-title,
+.sidebar .sidebar-session-group-title {
+  line-height: 1.35;
+}
+
+.sidebar .sidebar-time-group-header,
+.sidebar .sidebar-list-label {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+:root[data-theme="light"] .settings-segment-item {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 26px;
+  min-height: 26px;
+  padding: 0 10px !important;
+  line-height: 1 !important;
+  border-radius: 3px !important;
+}
+
+/* Toggle: recessed track with a floating thumb. No bevel borders at this size;
+   they read as noise. High priority because the host re-declares switch tokens
+   after theme CSS loads. */
+:root[data-theme="light"] .settings-toggle {
+  background: #a3947f !important;
+  border: 0 !important;
+  box-shadow:
+    inset 0 2px 3px rgba(42, 32, 20, .28),
+    inset 0 -1px 0 rgba(255, 255, 255, .18) !important;
+}
+
+:root[data-theme="light"] .settings-toggle:hover {
+  background: #948570 !important;
+}
+
+:root[data-theme="light"] .settings-toggle.on {
+  background: #6a8f3c !important;
+  box-shadow:
+    inset 0 2px 3px rgba(35, 52, 22, .3),
+    inset 0 -1px 0 rgba(255, 255, 255, .2) !important;
+}
+
+:root[data-theme="light"] .settings-toggle.on:hover {
+  background: #5c7f33 !important;
+}
+
+:root[data-theme="light"] .settings-toggle .settings-toggle-thumb {
+  background: #fdfbf6 !important;
+  border: 0 !important;
+  box-shadow:
+    0 1px 3px rgba(42, 32, 20, .35),
+    0 0 0 1px rgba(42, 32, 20, .05) !important;
+}
+
+/* Settings search: shorter, small radius, aligned placeholder. */
+:root[data-theme="light"] .settings-search {
+  height: 30px;
+  border-radius: 6px !important;
+  line-height: 1.15;
+}
+
+:root[data-theme="light"] .settings-search-wrap>svg {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* BoutiqueBitmap ink sits high in the em-box. Do not replace padding-top
+   with a tiny value (that collapses the host 5–7px padding and pins
+   content to the top). Keep total vertical padding, then steal 1px from
+   the bottom and give it to the top so the cluster drops 1px. */
+:root[data-theme="light"] .settings-nav.sidebar-surface .settings-nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+:root[data-theme="light"] .settings-nav.sidebar-surface .settings-nav-icon svg {
+  display: block;
+}
+
+:root[data-theme="light"] .settings-nav.sidebar-surface .settings-nav-label {
+  position: relative;
+  top: 1px;
+  line-height: 1;
+}
+
+:root[data-theme="light"] .settings-content .btn,
+:root[data-theme="light"] .settings-content .icon-btn,
+:root[data-theme="light"] .settings-content .settings-back,
+:root[data-theme="light"] .settings-content .settings-icon-button,
+:root[data-theme="light"] .settings-panel-actions .btn,
+:root[data-theme="light"] .agent-capability-toolbar-actions > .btn,
+:root[data-theme="light"] .agent-capability-empty-action .btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: 1 !important;
+}
+
+:root[data-theme="light"] .settings-content .btn {
+  padding-top: 8px !important;
+  padding-bottom: 6px !important;
+}
+
+:root[data-theme="light"] .agent-capability-toolbar-actions > .btn,
+:root[data-theme="light"] .agent-capability-empty-action .btn {
+  padding-top: 6px !important;
+  padding-bottom: 4px !important;
+}
+
+:root[data-theme="light"] .settings-row-control .btn,
+:root[data-theme="light"] .settings-row-control > button:not(.settings-toggle):not([role="switch"]) {
+  padding-top: 1px !important;
+  padding-bottom: 0 !important;
+}
+
+:root[data-theme="light"] .settings-content .btn svg,
+:root[data-theme="light"] .settings-content .icon-btn svg,
+:root[data-theme="light"] .settings-content .settings-back svg,
+:root[data-theme="light"] .settings-content .settings-icon-button svg,
+:root[data-theme="light"] .settings-panel-actions .btn svg,
+:root[data-theme="light"] .agent-capability-toolbar-actions > .btn svg,
+:root[data-theme="light"] .agent-capability-empty-action .btn svg,
+:root[data-theme="light"] .settings-content .vendor-btn-inner svg,
+:root[data-theme="light"] .settings-content .oauth-btn-inner svg,
+:root[data-theme="light"] .settings-content .model-config-btn-inner svg {
+  display: block;
+  flex: none;
+  overflow: visible;
+  position: relative;
+  top: -1px;
+}
+
+:root[data-theme="light"] .settings-content .vendor-btn-inner,
+:root[data-theme="light"] .settings-content .oauth-btn-inner,
+:root[data-theme="light"] .settings-content .model-config-btn-inner {
+  align-items: center;
+  line-height: 1;
+}
+:root[data-theme="light"] .settings-content .vendor-btn-inner > span,
+:root[data-theme="light"] .settings-content .oauth-btn-inner > span,
+:root[data-theme="light"] .settings-content .model-config-btn-inner > span {
+  position: relative;
+  top: 1px;
+  line-height: 1;
+}
+
+:root[data-theme="light"] .settings-language-trigger,
+:root[data-theme="light"] .settings-theme-trigger,
+:root[data-theme="light"] .settings-menu-select-trigger,
+:root[data-theme="light"] .settings-font-trigger {
+  overflow: visible;
+  line-height: 1;
+}
+
+:root[data-theme="light"] .settings-language-trigger-label,
+:root[data-theme="light"] .settings-theme-trigger-label,
+:root[data-theme="light"] .settings-menu-select-trigger-label,
+:root[data-theme="light"] .settings-font-trigger-label {
+  position: static;
+  top: auto;
+  overflow: visible;
+  line-height: 1;
+  padding-top: 1px;
+}
+
+/* Waiting for the model: a compact 3x3 shadow-dot grid (source l26, scaled to the status row). */
+:root[data-theme="light"] .working-indicator[data-testid="working-indicator"] ,
+:root[data-theme="light"] .run-activity-indicator[data-phase="waiting-model"] {
+  color: #3f6028;
+}
+
+/* Match the sidebar conversation titles, regardless of the global reading font. */
+:root[data-theme="light"] .working-indicator[data-testid="working-indicator"] .working-indicator-label,
+:root[data-theme="light"] .run-activity-indicator[data-phase="waiting-model"] .working-indicator-label,
+:root[data-theme="light"] .working-indicator[data-testid="working-indicator"] .working-elapsed ,
+:root[data-theme="light"] .run-activity-indicator[data-phase="waiting-model"] .working-elapsed {
+  font-family: "Craftdesk Boutique", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;
+  font-synthesis: none;
+  letter-spacing: 0;
+}
+
+:root[data-theme="light"] .working-indicator[data-testid="working-indicator"] .working-indicator-mark ,
+:root[data-theme="light"] .run-activity-indicator[data-phase="waiting-model"] .working-indicator-mark {
+  position: relative;
+  width: 18px;
+  height: 16px;
+  color: #4f7434;
+}
+
+:root[data-theme="light"] .working-indicator[data-testid="working-indicator"] .working-indicator-mark > span ,
+:root[data-theme="light"] .run-activity-indicator[data-phase="waiting-model"] .working-indicator-mark > span {
+  visibility: hidden;
+}
+
+:root[data-theme="light"] .working-indicator[data-testid="working-indicator"] .working-indicator-mark::before ,
+:root[data-theme="light"] .run-activity-indicator[data-phase="waiting-model"] .working-indicator-mark::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  box-shadow:
+    19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+    19px   0px 0 5px, 38px   0px 0 5px, 57px   0px 0 5px,
+    19px  19px 0 0px, 38px  19px 0 0px, 57px  19px 0 0px;
+  transform: scale(.25);
+  transform-origin: 0 0;
+  animation: craftdesk-waiting-grid 2s linear infinite;
+}
+
+:root[data-theme="light"] .working-indicator[data-testid="working-indicator"] .working-elapsed ,
+:root[data-theme="light"] .run-activity-indicator[data-phase="waiting-model"] .working-elapsed {
+  color: #4f7434;
+}
+
+@keyframes craftdesk-waiting-grid {
+  12.5% { box-shadow:
+    19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 5px,
+    19px   0px 0 5px, 38px   0px 0 0px, 57px   0px 0 5px,
+    19px  19px 0 0px, 38px  19px 0 0px, 57px  19px 0 0px; }
+  25% { box-shadow:
+    19px -19px 0 5px, 38px -19px 0 0px, 57px -19px 0 5px,
+    19px   0px 0 0px, 38px   0px 0 0px, 57px   0px 0 0px,
+    19px  19px 0 0px, 38px  19px 0 5px, 57px  19px 0 0px; }
+  50% { box-shadow:
+    19px -19px 0 5px, 38px -19px 0 5px, 57px -19px 0 0px,
+    19px   0px 0 0px, 38px   0px 0 0px, 57px   0px 0 0px,
+    19px  19px 0 0px, 38px  19px 0 0px, 57px  19px 0 5px; }
+  62.5% { box-shadow:
+    19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+    19px   0px 0 5px, 38px   0px 0 0px, 57px   0px 0 0px,
+    19px  19px 0 0px, 38px  19px 0 5px, 57px  19px 0 5px; }
+  75% { box-shadow:
+    19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+    19px   0px 0 0px, 38px   0px 0 0px, 57px   0px 0 5px,
+    19px  19px 0 0px, 38px  19px 0 0px, 57px  19px 0 5px; }
+  87.5% { box-shadow:
+    19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+    19px   0px 0 0px, 38px   0px 0 5px, 57px   0px 0 0px,
+    19px  19px 0 5px, 38px  19px 0 0px, 57px  19px 0 0px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme="light"] .working-indicator[data-testid="working-indicator"] .working-indicator-mark::before ,
+  :root[data-theme="light"] .run-activity-indicator[data-phase="waiting-model"] .working-indicator-mark::before {
+    animation: none;
+  }
+}

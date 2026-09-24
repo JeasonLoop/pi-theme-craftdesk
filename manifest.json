@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.jeasonloop.theme-craftdesk",
+  "name": "Craftdesk Theme",
+  "version": "1.4.6",
+  "description": "A refined pixel-workbench theme for PI-Desktop: BoutiqueBitmap 9x9 UI type, JetBrains Mono for code, a quiet drafting grid, charcoal navigation, and restrained grass-green state color.",
+  "i18n": {
+    "en": {
+      "name": "Craftdesk Theme",
+      "description": "BoutiqueBitmap pixel typography, JetBrains Mono code, a quiet drafting grid, charcoal navigation, and restrained green state color.",
+      "safetyNotes": "CSS-only global theme with a local information panel. No network, file, clipboard, or agent access."
+    },
+    "zh-CN": {
+      "name": "Craftdesk 方野主题",
+      "description": "复刻参考站开源 BoutiqueBitmap 中文点阵字体，代码使用 JetBrains Mono，搭配制图网格、炭黑导航与克制草绿状态色。",
+      "safetyNotes": "纯 CSS 全局主题和本地说明面板，不访问网络、文件、剪贴板或智能体。"
+    }
+  },
+  "author": "JeasonLoop",
+  "homepage": "https://github.com/JeasonLoop/pi-theme-craftdesk",
+  "repository": "https://github.com/JeasonLoop/pi-theme-craftdesk",
+  "main": "main.js",
+  "ui": {
+    "panel": "renderer/index.html",
+    "width": 440,
+    "height": 340,
+    "title": {
+      "en": "Craftdesk Theme",
+      "zh-CN": "Craftdesk 方野主题"
+    }
+  },
+  "contributes": {
+    "themes": [
+      {
+        "id": "craftdesk",
+        "label": "Craftdesk 方野",
+        "base": "light",
+        "path": "themes/craftdesk.css",
+        "assets": [
+          "fonts/BoutiqueBitmap9x9.woff2",
+          "fonts/JetBrainsMono-Regular.woff2"
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "theme",
+    "community"
+  ],
+  "safetyNotes": "Pure styling. No network, file, clipboard, or agent access.",
+  "changelog": "1.4.6: Recenter settings buttons and nav: drop the SVG lift, give labels a real 1px optical offset, and keep icons on the flex centerline.",
+  "permissions": [
+    "ui.panel",
+    "ui.theme"
+  ],
+  "engines": {
+    "piDesktop": ">=0.15.6"
+  }
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Craftdesk settings theme picker">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="rgba(67,70,65,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="720" fill="#f6f4ef"/>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+  <rect x="40" y="40" width="1200" height="640" rx="8" fill="#fcfaf5" stroke="rgba(50,54,49,0.16)"/>
+  <rect x="40" y="40" width="260" height="640" fill="#292b29"/>
+  <text x="68" y="88" fill="#f6f4ef" font-size="18" font-family="ui-sans-serif, Segoe UI, sans-serif">设置</text>
+  <rect x="56" y="120" width="228" height="40" rx="3" fill="#1f211f"/>
+  <rect x="56" y="120" width="4" height="40" fill="#4f7434"/>
+  <text x="76" y="146" fill="#eceae4" font-size="14" font-family="ui-sans-serif, Segoe UI, sans-serif">外观</text>
+  <text x="76" y="198" fill="#9aa096" font-size="14" font-family="ui-sans-serif, Segoe UI, sans-serif">模型</text>
+  <text x="76" y="242" fill="#9aa096" font-size="14" font-family="ui-sans-serif, Segoe UI, sans-serif">插件</text>
+  <text x="340" y="100" fill="#292b29" font-size="22" font-family="ui-sans-serif, Segoe UI, sans-serif">主题</text>
+  <text x="340" y="132" fill="#5e625c" font-size="14" font-family="ui-sans-serif, Segoe UI, sans-serif">选择会写入 plugin:&lt;id&gt;:&lt;themeId&gt;</text>
+  <rect x="340" y="168" width="520" height="48" rx="4" fill="#eeece6" stroke="rgba(50,54,49,0.2)"/>
+  <text x="360" y="198" fill="#292b29" font-size="16" font-family="ui-sans-serif, Segoe UI, sans-serif">Craftdesk 方野</text>
+  <text x="780" y="198" fill="#4f7434" font-size="14" font-family="ui-sans-serif, Segoe UI, sans-serif">light</text>
+  <g transform="translate(340,248)">
+    <rect width="72" height="36" rx="18" fill="#4f7434"/>
+    <circle cx="54" cy="18" r="14" fill="#fcfaf5"/>
+    <text x="92" y="24" fill="#292b29" font-size="14" font-family="ui-sans-serif, Segoe UI, sans-serif">跟随系统字体合成已关闭</text>
+  </g>
+  <rect x="340" y="320" width="820" height="300" rx="6" fill="#f6f4ef" stroke="rgba(50,54,49,0.12)"/>
+  <text x="364" y="360" fill="#292b29" font-size="16" font-family="ui-sans-serif, Segoe UI, sans-serif">调色板</text>
+  <rect x="364" y="384" width="48" height="48" fill="#f6f4ef" stroke="#6f6458"/>
+  <rect x="428" y="384" width="48" height="48" fill="#292b29"/>
+  <rect x="492" y="384" width="48" height="48" fill="#4f7434"/>
+  <rect x="556" y="384" width="48" height="48" fill="#fcfaf5" stroke="#6f6458"/>
+  <rect x="620" y="384" width="48" height="48" fill="#aa742d"/>
+  <rect x="684" y="384" width="48" height="48" fill="#b84c42"/>
+  <text x="364" y="468" fill="#5e625c" font-size="14" font-family="ui-sans-serif, Segoe UI, sans-serif">paper #f6f4ef · charcoal #292b29 · grass #4f7434</text>
+  <text x="364" y="504" fill="#5e625c" font-size="14" font-family="ui-sans-serif, Segoe UI, sans-serif">界面字体 BoutiqueBitmap 9x9 · 代码 JetBrains Mono</text>
+  <text x="364" y="548" fill="#686e65" font-size="13" font-family="ui-sans-serif, Segoe UI, sans-serif">权限：ui.theme + ui.panel · 无网络 / 文件 / 剪贴板 / Agent</text>
+</svg>
